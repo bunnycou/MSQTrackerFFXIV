@@ -20,6 +20,27 @@
           "Microsoft.SourceLink.GitLab": "1.1.1"
         }
       },
+      "HtmlAgilityPack": {
+        "type": "Direct",
+        "requested": "[1.11.72, )",
+        "resolved": "1.11.72",
+        "contentHash": "RNLgXxTFdIGFI+o5l8c2aJ2L5StIRn9Uv8HKR76p7QP4ZUL26wzpWUCWh08xWUdkL2kocl+Xhv6VUu0rA1npVg=="
+      },
+      "HtmlAgilityPack.CssSelectors.NetCore": {
+        "type": "Direct",
+        "requested": "[1.2.1, )",
+        "resolved": "1.2.1",
+        "contentHash": "ES2Ht+wpgaLmyyyCP9cl3AT5U2BtTOCZ2pdFL8GYa27V8IAD9U77KOcuvi61k+nDE4kpU+EjwaBJepVFqLpmGA==",
+        "dependencies": {
+          "HtmlAgilityPack": "1.6.16"
+        }
+      },
+      "Newtonsoft.Json": {
+        "type": "Direct",
+        "requested": "[13.0.3, )",
+        "resolved": "13.0.3",
+        "contentHash": "HrC5BXdl00IP9zeV+0Z848QWPAoCr9P3bDEZguI+gkLcBKAOxix/tLEAAHC+UvDNPv4a2d18lOReHMOagPa+zQ=="
+      },
       "Microsoft.Build.Tasks.Git": {
         "type": "Transitive",
         "resolved": "1.1.1",

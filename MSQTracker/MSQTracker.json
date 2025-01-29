@@ -1,0 +1,12 @@
+{
+  "Author": "bunnycou",
+  "Name": "MSQTracker",
+  "Punchline": "Display MSQ Progress",
+  "Description": "Display MSQ Progress. /msqtrack to toggle display.",
+  "ApplicableVersion": "any",
+  "Tags": [
+    "msq",
+    "track",
+    "tracker"
+  ]
+}
