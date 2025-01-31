@@ -4,6 +4,7 @@
   "Punchline": "Display MSQ Progress",
   "Description": "Display MSQ Progress. /msqt to toggle display.",
   "ApplicableVersion": "any",
+  "RepoUrl": "https://github.com/bunnycou/MSQTrackerFFXIV",
   "Tags": [
     "msq",
     "track",

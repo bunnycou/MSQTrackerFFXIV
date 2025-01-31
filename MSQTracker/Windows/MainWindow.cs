@@ -8,12 +8,8 @@ namespace MSQTracker.Windows;
 public class MainWindow : Window, IDisposable
 {
     private Plugin plugin;
-    private MSQProgress progress;
 
-    // We give this window a hidden ID using ##
-    // So that the user will see "My Amazing Window" as window title,
-    // but for ImGui the ID is "My Amazing Window##With a hidden ID"
-    public MainWindow(Plugin plugin, MSQProgress progress)
+    public MainWindow(Plugin plugin)
         : base("MSQTracker##MSQTMain", ImGuiWindowFlags.NoScrollbar | ImGuiWindowFlags.NoScrollWithMouse)
     {
         SizeConstraints = new WindowSizeConstraints
@@ -23,7 +19,6 @@ public class MainWindow : Window, IDisposable
         };
 
         this.plugin = plugin;
-        this.progress = progress;
     }
 
     public void Dispose()
@@ -32,8 +27,8 @@ public class MainWindow : Window, IDisposable
 
     public unsafe override void Draw()
     {
-        ImGui.TextUnformatted(progress.xpac);
-        ImGui.TextUnformatted(progress.questName);
-        ImGui.TextUnformatted($"{progress.percentProgress} ({progress.currentQuestNum}/{progress.totalQuests})");
+        ImGui.TextUnformatted(plugin.progress.xpac);
+        ImGui.TextUnformatted(plugin.progress.questName);
+        ImGui.TextUnformatted($"{plugin.progress.percentProgress} ({plugin.progress.currentQuestNum}/{plugin.progress.totalQuests})");
     }
 }

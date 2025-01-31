@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Version>0.0.0.1</Version>
     <Description>Track progress through MSQ</Description>
-    <PackageProjectUrl>https://github.com/bunnycou/MSQTracker</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/bunnycou/MSQTrackerFFXIV</PackageProjectUrl>
     <PackageLicenseExpression>AGPL-3.0-or-later</PackageLicenseExpression>
     <IsPackable>false</IsPackable>
   </PropertyGroup>
