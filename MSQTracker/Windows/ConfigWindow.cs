@@ -20,7 +20,7 @@ public class ConfigWindow : Window, IDisposable
         Flags = ImGuiWindowFlags.NoResize | ImGuiWindowFlags.NoCollapse | ImGuiWindowFlags.NoScrollbar |
                 ImGuiWindowFlags.NoScrollWithMouse;
 
-        Size = new Vector2(160, 100);
+        Size = new Vector2(180, 150);
         SizeCondition = ImGuiCond.Always;
 
         configuration = plugin.Configuration;
@@ -44,6 +44,12 @@ public class ConfigWindow : Window, IDisposable
     public override void Draw()
     {
         ImGui.TextUnformatted("MSQTracker 1.0");
+        ImGui.TextUnformatted("Pulls data from");
+        ImGui.TextUnformatted("ffxiv-progress.com");
+
+        ImGui.Spacing();
+        ImGui.Spacing();
+        ImGui.Spacing();
 
         if (configuration.Tracking)
         {

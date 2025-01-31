@@ -2,7 +2,7 @@
   "Author": "bunnycou",
   "Name": "MSQTracker",
   "Punchline": "Display MSQ Progress",
-  "Description": "Display MSQ Progress. /msqtrack to toggle display.",
+  "Description": "Display MSQ Progress. /msqt to toggle display.",
   "ApplicableVersion": "any",
   "Tags": [
     "msq",
