@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using FFXIVClientStructs.FFXIV.Client.Game;
 using HtmlAgilityPack;
@@ -13,30 +15,6 @@ namespace MSQTracker
             configuration = plugin.Configuration;
         }
 
-        public void SetQuest(string questNameNew)
-        {
-            if (questName == questNameNew) { return; }
-            Thread thread = new Thread(() =>
-            {
-                HtmlWeb web = new HtmlWeb();
-                HtmlDocument document = web.Load("https://ffxiv-progress.com/?search=" + questNameToUrl(questNameNew));
-                HtmlNode activeXpac = document.DocumentNode.QuerySelector("div.active");
-
-                if (activeXpac == null) { return; } // quest input was not valid
-
-                var xpacAndQuests = activeXpac.QuerySelectorAll("span");
-                var questNums = xpacAndQuests[1].InnerText.Split(" of ");
-                var progressBar = activeXpac.QuerySelector("div.progress-bar");
-
-                questName = questNameNew;
-                xpac = xpacAndQuests[0].InnerText.Trim();
-                currentQuestNum = int.Parse(questNums[0]);
-                totalQuests = int.Parse(questNums[1]);
-                percentProgress = progressBar.InnerText;
-            });
-            thread.Start();
-        }
-
         public unsafe void StartLoop()
         {
             Thread thread = new Thread(() =>
@@ -45,29 +23,34 @@ namespace MSQTracker
                 {
                     if (configuration.Tracking)
                     {
+                        List<Quest> quests = new();
                         foreach (ref var questWork in QuestManager.Instance()->NormalQuests)
                         {
                             if (questWork.QuestId == 0) { continue; }
                             var questId = questWork.QuestId + 65536;
                             var questName = MSQTUtil.GetQuestName(questId.ToString());
-                            SetQuest(questName);
+                            configuration.QuestChecking = questName;
+                            quests.Add(new Quest(questName));
+                            Thread.Sleep(1 * 1000);
                         }
+                        quest = LowestMSQ(quests);
                     }
+                    configuration.QuestChecking = "Wait...";
                     Thread.Sleep(10 * 1000);
                 }
             });
             thread.Start();
         }
-
-        public string? questName { get; set; }
-        public string? percentProgress { get; set; }
-        public string? xpac { get; set; }
-        public int currentQuestNum { get; set; }
-        public int totalQuests { get; set; }
+        public Quest quest { get; set; }
+        //public string? questName { get; set; }
+        //public string? percentProgress { get; set; }
+        //public string? xpac { get; set; }
+        //public int currentQuestNum { get; set; }
+        //public int totalQuests { get; set; }
 
         public string numProgress()
         {
-            return currentQuestNum + "/" + totalQuests;
+            return quest.currentQuestNum + "/" + quest.totalQuests;
         }
         private string questNameToUrl(string qname)
         {
@@ -76,7 +59,29 @@ namespace MSQTracker
 
         public string TestOutput()
         {
-            return $"{xpac}: {questName} | {percentProgress} ({numProgress()})";
+            return $"{quest.xpac}: {quest.name} | {quest.percentProgress} ({numProgress()})";
+        }
+
+        private Quest LowestMSQ(List<Quest> quests)
+        {
+            List<Quest> MSQuest = new();
+            foreach(Quest quest in quests)
+            {
+                if (quest.currentQuestNum != -1)
+                {
+                    MSQuest.Add(quest);
+                }
+            }
+            if (MSQuest.Count > 1)
+            {
+                return MSQuest.OrderBy(l => l.currentQuestNum).ToList()[0];
+            } else if (MSQuest.Count == 1)
+            {
+                return MSQuest[0];
+            } else // no msq
+            {
+                return new Quest("no quest");
+            }
         }
     }
 }

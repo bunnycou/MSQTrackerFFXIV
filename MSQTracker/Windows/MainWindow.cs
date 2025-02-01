@@ -27,8 +27,8 @@ public class MainWindow : Window, IDisposable
 
     public unsafe override void Draw()
     {
-        ImGui.TextUnformatted(plugin.progress.xpac);
-        ImGui.TextUnformatted(plugin.progress.questName);
-        ImGui.TextUnformatted($"{plugin.progress.percentProgress} ({plugin.progress.currentQuestNum}/{plugin.progress.totalQuests})");
+        ImGui.TextUnformatted(plugin.progress.quest.xpac);
+        ImGui.TextUnformatted(plugin.progress.quest.name);
+        ImGui.TextUnformatted($"{plugin.progress.quest.percentProgress} ({plugin.progress.quest.currentQuestNum}/{plugin.progress.quest.totalQuests})");
     }
 }

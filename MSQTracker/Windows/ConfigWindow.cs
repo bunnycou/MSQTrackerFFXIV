@@ -14,7 +14,7 @@ public class ConfigWindow : Window, IDisposable
         Flags = ImGuiWindowFlags.NoResize | ImGuiWindowFlags.NoCollapse | ImGuiWindowFlags.NoScrollbar |
                 ImGuiWindowFlags.NoScrollWithMouse;
 
-        Size = new Vector2(180, 150);
+        Size = new Vector2(180, 170);
         SizeCondition = ImGuiCond.Always;
 
         configuration = plugin.Configuration;
@@ -49,5 +49,7 @@ public class ConfigWindow : Window, IDisposable
             configuration.Tracking = !configuration.Tracking;
             configuration.Save();
         }
+
+        ImGui.TextUnformatted($"Checking Quest: {configuration.QuestChecking}");
     }
 }

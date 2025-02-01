@@ -8,6 +8,7 @@ public class Configuration : IPluginConfiguration
 {
     public int Version { get; set; } = 0;
 
+    public string QuestChecking = "None";
     public bool isDevDumb = true; // :3
     public bool Tracking = true;
 
