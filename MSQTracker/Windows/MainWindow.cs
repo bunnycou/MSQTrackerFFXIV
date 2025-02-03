@@ -27,8 +27,22 @@ public class MainWindow : Window, IDisposable
 
     public unsafe override void Draw()
     {
-        ImGui.TextUnformatted(plugin.progress.quest.xpac);
-        ImGui.TextUnformatted(plugin.progress.quest.name);
-        ImGui.TextUnformatted($"{plugin.progress.quest.percentProgress} ({plugin.progress.quest.currentQuestNum}/{plugin.progress.quest.totalQuests})");
+        if (plugin.progress.quest.currentQuestNum == -1)
+        {
+            ImGui.TextUnformatted("No current MSQ");
+            ImGui.TextUnformatted("in progress.");
+            if (plugin.Configuration.Tracking)
+            {
+                ImGui.TextUnformatted("Checking in 10 Sec...");
+            } else
+            {
+                ImGui.TextUnformatted("Tracking Disabled.");
+            }
+        } else
+        {
+            ImGui.TextUnformatted(plugin.progress.quest.xpac);
+            ImGui.TextUnformatted(plugin.progress.quest.name);
+            ImGui.TextUnformatted($"{plugin.progress.quest.percentProgress} ({plugin.progress.quest.currentQuestNum}/{plugin.progress.quest.totalQuests})");
+        }
     }
 }

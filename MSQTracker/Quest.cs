@@ -23,7 +23,7 @@ namespace MSQTracker
             try
             {
                 HtmlWeb web = new HtmlWeb();
-                HtmlDocument document = web.Load("https://ffxiv-progress.com/?search=" + questNameToUrl(questNameNew));
+                HtmlDocument document = web.Load("https://ffxiv-progress.com/?search=" + QuestNameToUrl(questNameNew));
                 HtmlNode activeXpac = document.DocumentNode.QuerySelector("div.active");
 
                 if (activeXpac == null) { throw new Exception(); } // quest input was not valid
@@ -54,7 +54,7 @@ namespace MSQTracker
         public int currentQuestNum { get; set; }
         public int totalQuests { get; set; }
 
-        private string questNameToUrl(string qname)
+        private string QuestNameToUrl(string qname)
         {
             return string.Join("%20", qname.ToLower().Split(" "));
         }
