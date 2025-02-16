@@ -13,7 +13,7 @@ namespace MSQTracker
         public MSQProgress(Plugin plugin)
         {
             configuration = plugin.Configuration;
-            quests = new();
+            questBook = new();
         }
 
         public unsafe void StartLoop()
@@ -32,20 +32,20 @@ namespace MSQTracker
                             var questName = MSQTUtil.GetQuestName(questId.ToString());
                             configuration.QuestChecking = questName;
                             currentQuests.Add(questName);
-                            if (quests.Find(l => l.name == questName) == null) // does not exist in list
+                            if (questBook.Find(l => l.name == questName) == null) // new quest does not exist in questbook, add it
                             {
-                                quests.Add(new Quest(questName));
+                                questBook.Add(new Quest(questName));
+                                Thread.Sleep(1 * 1000);
                             }
-                            Thread.Sleep(1 * 1000);
                         }
-                        foreach(Quest qst in quests)
+                        foreach(Quest qst in questBook)
                         {
-                            if (!currentQuests.Contains(qst.name)) // current quests does not have quest, meaning we dont have it and need to remvoe it
+                            if (!currentQuests.Contains(qst.name)) // current questlist does not have quest, meaning we dont have it anymore and need to remove it from questbook
                             {
-                                quests.Remove(qst);
+                                questBook.Remove(qst);
                             }
                         }
-                        quest = LowestMSQ(quests);
+                        quest = LowestMSQ(questBook);
                     }
                     configuration.QuestChecking = "Wait...";
                     Thread.Sleep(10 * 1000);
@@ -55,7 +55,7 @@ namespace MSQTracker
         }
         public Quest quest { get; set; }
 
-        public List<Quest> quests { get; set; }
+        public List<Quest> questBook { get; set; }
 
         public string numProgress()
         {
