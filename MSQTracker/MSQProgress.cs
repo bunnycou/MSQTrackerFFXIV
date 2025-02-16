@@ -32,20 +32,28 @@ namespace MSQTracker
                             var questName = MSQTUtil.GetQuestName(questId.ToString());
                             configuration.QuestChecking = questName;
                             currentQuests.Add(questName);
-                            if (questBook.Find(l => l.name == questName) == null) // new quest does not exist in questbook, add it
+                            if (questBook.FindIndex(l => l.name == questName) == -1) // new quest does not exist in questbook, add it
                             {
                                 questBook.Add(new Quest(questName));
                                 Thread.Sleep(1 * 1000);
                             }
                         }
-                        foreach(Quest qst in questBook)
+
+                        List<Quest> removeQuests = new();
+                        foreach(Quest quest in questBook)
                         {
-                            if (!currentQuests.Contains(qst.name)) // current questlist does not have quest, meaning we dont have it anymore and need to remove it from questbook
+                            if (!currentQuests.Contains(quest.name)) // current questlist does not have quest, meaning we dont have it anymore and need to remove it from questbook
                             {
-                                questBook.Remove(qst);
+                                removeQuests.Add(quest);
                             }
                         }
-                        quest = LowestMSQ(questBook);
+
+                        foreach(Quest quest in removeQuests)
+                        {
+                            questBook.Remove(quest);
+                        }
+
+                        quest = LowestMSQ();
                     }
                     configuration.QuestChecking = "Wait...";
                     Thread.Sleep(10 * 1000);
@@ -71,32 +79,14 @@ namespace MSQTracker
             return $"{quest.xpac}: {quest.name} | {quest.percentProgress} ({numProgress()})";
         }
 
-        private Quest LowestMSQ(List<Quest> quests)
+        private Quest LowestMSQ()
         {
-            if (quests.Count == 0) // return empty quest if there is no quests
+            if (questBook.Count == 0) // return empty quest if there is no quests
             {
                 return new Quest("No Quests");
             }
-            List<Quest> MSQuest = new();
-            foreach(Quest quest in quests)
-            {
-                if (quest.currentQuestNum != -1)
-                {
-                    MSQuest.Add(quest);
-                }
-            }
-            if (MSQuest.Count > 1)
-            {
-                return MSQuest.OrderBy(l => l.currentQuestNum).ToList()[0];
-            }
-            else if (MSQuest.Count == 1)
-            {
-                return MSQuest[0];
-            }
-            else // return first quest if there is no msq
-            {
-                return quests[0];
-            }
+
+            return questBook.OrderBy(l => l.currentQuestNum).First(l => l.currentQuestNum != -1);
         }
     }
 }
