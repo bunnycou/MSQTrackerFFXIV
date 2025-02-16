@@ -40,11 +40,11 @@ namespace MSQTracker
             }
             catch
             { // load dumy data
-                name = "Close to Home";
+                name = questNameNew;
                 percentProgress = "0%";
-                xpac = "A Realm Reborn";
+                xpac = "Not Found";
                 currentQuestNum = -1; // tell tale sign no quest was found
-                totalQuests = 305;
+                totalQuests = 99;
             }
         }
 

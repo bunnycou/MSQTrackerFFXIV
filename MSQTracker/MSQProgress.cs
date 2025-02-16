@@ -13,6 +13,7 @@ namespace MSQTracker
         public MSQProgress(Plugin plugin)
         {
             configuration = plugin.Configuration;
+            quests = new();
         }
 
         public unsafe void StartLoop()
@@ -23,15 +24,26 @@ namespace MSQTracker
                 {
                     if (configuration.Tracking)
                     {
-                        List<Quest> quests = new();
+                        List<string> currentQuests = new();
                         foreach (ref var questWork in QuestManager.Instance()->NormalQuests)
                         {
                             if (questWork.QuestId == 0) { continue; }
                             var questId = questWork.QuestId + 65536;
                             var questName = MSQTUtil.GetQuestName(questId.ToString());
                             configuration.QuestChecking = questName;
-                            quests.Add(new Quest(questName));
+                            currentQuests.Add(questName);
+                            if (quests.Find(l => l.name == questName) == null) // does not exist in list
+                            {
+                                quests.Add(new Quest(questName));
+                            }
                             Thread.Sleep(1 * 1000);
+                        }
+                        foreach(Quest qst in quests)
+                        {
+                            if (!currentQuests.Contains(qst.name)) // current quests does not have quest, meaning we dont have it and need to remvoe it
+                            {
+                                quests.Remove(qst);
+                            }
                         }
                         quest = LowestMSQ(quests);
                     }
@@ -42,11 +54,8 @@ namespace MSQTracker
             thread.Start();
         }
         public Quest quest { get; set; }
-        //public string? questName { get; set; }
-        //public string? percentProgress { get; set; }
-        //public string? xpac { get; set; }
-        //public int currentQuestNum { get; set; }
-        //public int totalQuests { get; set; }
+
+        public List<Quest> quests { get; set; }
 
         public string numProgress()
         {
@@ -80,7 +89,7 @@ namespace MSQTracker
                 return MSQuest[0];
             } else // no msq
             {
-                return new Quest("no quest");
+                return quests[0];
             }
         }
     }
