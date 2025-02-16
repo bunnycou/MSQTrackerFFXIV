@@ -73,6 +73,10 @@ namespace MSQTracker
 
         private Quest LowestMSQ(List<Quest> quests)
         {
+            if (quests.Count == 0) // return empty quest if there is no quests
+            {
+                return new Quest("No Quests");
+            }
             List<Quest> MSQuest = new();
             foreach(Quest quest in quests)
             {
@@ -84,10 +88,12 @@ namespace MSQTracker
             if (MSQuest.Count > 1)
             {
                 return MSQuest.OrderBy(l => l.currentQuestNum).ToList()[0];
-            } else if (MSQuest.Count == 1)
+            }
+            else if (MSQuest.Count == 1)
             {
                 return MSQuest[0];
-            } else // no msq
+            }
+            else // return first quest if there is no msq
             {
                 return quests[0];
             }

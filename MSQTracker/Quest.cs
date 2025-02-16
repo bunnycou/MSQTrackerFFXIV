@@ -22,6 +22,7 @@ namespace MSQTracker
             if (name == questNameNew) { return; }
             try
             {
+                if (questNameNew == "No Quests") { throw new Exception("No Quest To Lookup"); }
                 HtmlWeb web = new HtmlWeb();
                 HtmlDocument document = web.Load("https://ffxiv-progress.com/?search=" + QuestNameToUrl(questNameNew));
                 HtmlNode activeXpac = document.DocumentNode.QuerySelector("div.active");
