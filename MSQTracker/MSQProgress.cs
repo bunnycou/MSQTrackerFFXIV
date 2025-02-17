@@ -81,7 +81,7 @@ namespace MSQTracker
 
         private Quest LowestMSQ()
         {
-            if (questBook.Count == 0) // return empty quest if there is no quests
+            if (questBook.Count == 0 || !questBook.Exists(l => l.currentQuestNum != -1)) // return empty quest if there is no quests
             {
                 return new Quest("No Quests");
             }
