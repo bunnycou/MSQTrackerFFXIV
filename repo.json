@@ -1,0 +1,29 @@
+[
+    {
+      "Author": "bunnycou",
+      "Name": "MSQTracker",
+      "Punchline": "Track MSQ Progress.",
+      "Description": "Track MSQ Progress with ffxiv-progress.com automatically in game.",
+      "Tags": [
+        "MSQ",
+        "Quest",
+        "Track",
+        "Progress"
+      ],
+      "InternalName": "MSQTracker",
+      "AssemblyVersion": "1.0",
+      "TestingAssemblyVersion": "1.0",
+      "RepoUrl": "https://github.com/bunnycou/MSQTrackerFFXXIV",
+      "ApplicableVersion": "any",
+      "DalamudApiLevel": 11,
+      "TestingDalamudApiLevel": 11,
+      "IsHide": "False",
+      "IsTestingExclusive": "False",
+      "DownloadCount": 1,
+      "LastUpdate": 1739812779,
+      "DownloadLinkInstall": "https://github.com/bunnycou/MSQTrackerFFXIV/releases/download/1.0/MSQTracker.zip",
+      "DownloadLinkUpdate": "https://github.com/bunnycou/MSQTrackerFFXIV/releases/download/1.0/MSQTracker.zip",
+      "DownloadLinkTesting": "https://github.com/bunnycou/MSQTrackerFFXIV/releases/download/1.0/MSQTracker.zip",
+      "IconUrl": "https://raw.githubusercontent.com/bunnycou/MSQTrackerFFXIV/refs/heads/main/images/icon.png"
+    }
+  ]
