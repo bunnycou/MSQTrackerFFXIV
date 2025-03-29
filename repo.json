@@ -21,9 +21,9 @@
       "IsTestingExclusive": "False",
       "DownloadCount": 1,
       "LastUpdate": 1739812779,
-      "DownloadLinkInstall": "https://github.com/bunnycou/MSQTrackerFFXIV/releases/download/1.0/MSQTracker.zip",
-      "DownloadLinkUpdate": "https://github.com/bunnycou/MSQTrackerFFXIV/releases/download/1.0/MSQTracker.zip",
-      "DownloadLinkTesting": "https://github.com/bunnycou/MSQTrackerFFXIV/releases/download/1.0/MSQTracker.zip",
+      "DownloadLinkInstall": "https://github.com/bunnycou/MSQTrackerFFXIV/releases/download/1.0.7.2/MSQTracker.zip",
+      "DownloadLinkUpdate": "https://github.com/bunnycou/MSQTrackerFFXIV/releases/download/1.0.7.2/MSQTracker.zip",
+      "DownloadLinkTesting": "https://github.com/bunnycou/MSQTrackerFFXIV/releases/download/1.0.7.2/MSQTracker.zip",
       "IconUrl": "https://raw.githubusercontent.com/bunnycou/MSQTrackerFFXIV/refs/heads/main/images/icon.png"
     }
   ]
